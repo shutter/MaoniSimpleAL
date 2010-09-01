@@ -1,5 +1,8 @@
 #include "Sound.hpp"
 
+#include <AL/alc.h>
+#include <AL/alure.h>
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <iostream>
@@ -52,7 +55,7 @@ void Sound::createSoundBuffer(const std::string filename)
 	else
 	{
 		std::cout << " try to replace ...";
-		alureBufferDataFromFile(filename.c_str(), soundBuffer);
+		if(alureBufferDataFromFile(filename.c_str(), soundBuffer)==AL_FALSE) soundBuffer = AL_NONE;
 	}
 
 	if (soundBuffer == AL_NONE)
@@ -92,7 +95,7 @@ void Sound::play()
 
 const char* const Sound::filter() const
 {
-	return "Sound files (*.wav *.ogg)";
+	return "Sound files (*.wav *.ogg *.aiff)";
 }
 
 void Sound::reset()

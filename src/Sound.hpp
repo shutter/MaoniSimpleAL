@@ -1,12 +1,10 @@
 #ifndef SOUND_HPP_
 #define SOUND_HPP_
 
-#include <AL/al.h>
-#include <AL/alc.h>
-#include <AL/alure.h>
 #include <string.h>
 #include <Maoni.hpp>
 #include <Maoni/Path.hpp>
+#include <AL/al.h>
 
 class Sound: public Path
 {
@@ -28,8 +26,7 @@ private:
 	ALuint soundBuffer, soundSource;
 	ALint state;
 
-	std::string old_filename;
-	bool play_, change_flag;
+	bool play_;
 
 private:
 	void reset();
