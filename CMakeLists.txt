@@ -23,7 +23,7 @@ include_directories(include
 
 add_executable(MaoniSimpleAL 
   src/main.cpp
-  src/sound.cpp
+  src/Sound.cpp
   )
   
 target_link_libraries(MaoniSimpleAL ${Maoni_LIBRARIES} ${GLEW_LIBRARIES} ${OPENGL_LIBRARIES} ${OPENAL_LIBRARY} ${ALURE_LIBRARY})

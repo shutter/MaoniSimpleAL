@@ -5,21 +5,17 @@
 
 #include <GL/glew.h>
 #include <Maoni.hpp>
-#include "sound.hpp"
+#include "Sound.hpp"
 #include <GL/glu.h>
 #include <math.h>
 
 RENDER_ALGORITHM(MaoniSound,
 		(bool, play, false)
-		(Path, file, "../brass2rass.ogg")
+		(mutable Sound, mysound, "../Fantasie-Impromptu_--_Frederic_Chopin.ogg")
 		(float, velocity, 1.f)
 		(bool, demo, true)
-		(float, source_pos_x, 0.f)
-		(float, source_pos_y, 0.f)
-		(float, source_pos_z, 1.f)
-		(float, listener_pos_x, 0.f)
-		(float, listener_pos_y, 0.f)
-		(float, listener_pos_z, 0.f)
+		(Vec3, source_pos, Vec3(0.f, 0.f, 1.f))
+		(Vec3, listener_pos, Vec3(0.f, 0.f, 0.f))
 )
 {
 	static Vec3 sourcePos(0.f, 0.f, 0.f);
@@ -27,9 +23,7 @@ RENDER_ALGORITHM(MaoniSound,
 
 	static float degree;
 
-	// Sound
-	static sound mysound;
-	mysound.setConfig(file.path(), play);
+	mysound.setConfig(play);
 
 	if (play && demo)
 	{
@@ -42,13 +36,8 @@ RENDER_ALGORITHM(MaoniSound,
 		listenerPos.data[2] = 0.f;
 
 	}else{
-		sourcePos.data[0] = source_pos_x;
-		sourcePos.data[1] = source_pos_y;
-		sourcePos.data[2] = source_pos_z;
-
-		listenerPos.data[0] = listener_pos_x;
-		listenerPos.data[1] = listener_pos_y;
-		listenerPos.data[2] = listener_pos_z;
+		sourcePos = source_pos;
+		listenerPos = listener_pos;
 	}
 	mysound.setSourcePos(sourcePos);
 	mysound.setListenerPos(listenerPos);
@@ -73,5 +62,5 @@ RENDER_ALGORITHM(MaoniSound,
 
 	gluDeleteQuadric(quadric);
 
-	mysound.draw();
+	mysound.play();
 }
